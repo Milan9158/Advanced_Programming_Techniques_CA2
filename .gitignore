@@ -1,0 +1,15 @@
+
+#virtual environment
+venv/
+
+
+#python cache files
+__pycache__/
+*.pyc
+
+#SQLite database
+database/tracker.db
+
+
+# vs code settings
+.vscode/
