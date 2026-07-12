@@ -38,3 +38,37 @@ def create_issue():
    return jsonify({
       "message":"issue created successfully"
    }),201
+
+
+@issue_bp.route("/issues/<int:id>",methods=["PUT"])
+def update_issue(id):
+    #to update an existing issue.
+    issue=Issue.query.get_or_404(id)
+
+    data=request.get_json()
+
+    issue.title=data.get("title",issue.title)
+    issue.description=data.get("description",issue.description)
+    issue.priority=data.get("priority",issue.priority)
+    issue.status=data.get("status",issue.status)
+    issue.assigned_to=data.get("assigned_to",issue.assigned_to)
+
+    db.session.commit()
+
+    return jsonify({
+        "message":"issue updated"
+    })
+
+
+
+@issue_bp.route("/issues/<int:id>",methods=["DELETE"])
+def delete_issue(id):
+    #to delete  an issue
+    issue=Issue.query.get_or_404(id)
+
+    db.session.delete(issue)
+    db.session.commit()
+
+    return jsonify({
+        "message":"Issue deleted successfully"
+    })
