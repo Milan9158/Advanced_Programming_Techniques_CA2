@@ -72,3 +72,4 @@ def delete_issue(id):
     return jsonify({
         "message":"Issue deleted successfully"
     })
+
