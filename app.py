@@ -1,6 +1,7 @@
 from flask import Flask
 from config import Config
 from models import db
+from routes.issue_routes import issue_bp
 
 app = Flask(__name__)
 #to load the application configuration
@@ -8,6 +9,7 @@ app.config.from_object(Config)
 
 #to connect SQLALchemy to the Flask application
 db.init_app(app)
+app.register_blueprint(issue_bp)
 
 #Home route
 @app.route("/")
