@@ -73,3 +73,46 @@ def delete_issue(id):
         "message":"Issue deleted successfully"
     })
 
+
+
+@issue_bp.route("/issues/status/<string:status>",methods=["GET"])
+def get_issues_by_status(status):
+    #issues filtered by status
+    issues=Issue.query.filter_by(status=status).all()
+    results=[]
+
+    for issue in issues:
+        results.append({
+            "id":issue.id,
+            "title":issue.title,
+            "description":issue.description,
+            "priority":issue.priority,
+            "status":issue.status,
+            "assigned_to":issue.assigned_to,
+            "created_date":issue.created_data
+        })
+
+    return jsonify(results)
+
+
+@issue_bp.route("/issues/priority/<string:priority>", methods=["GET"])
+def get_issues_by_priority(priority):
+    #to return issues by filtered by priority
+    issues=Issue.query.filter_by(priority=priority).all()
+    results=[]
+    for issue in issues:
+        results.append({
+        "id":issue.id,
+        "title":issue.title,
+        "description":issue.description,
+        "priority":issue.priority,
+        "status":issue.status,
+        "assigned_to":issue.assigned_to,
+        "created_date":issue.created_data
+        
+
+        })
+    return jsonify(results)
+
+
+      
